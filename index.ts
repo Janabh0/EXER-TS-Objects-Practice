@@ -28,6 +28,30 @@ You need to describe a movie using an object. The movie has the following detail
            (You can log them using `console.log`)
 ******************************************************************/
 
+interface Review {
+  reviewer: string;
+  comment: string;
+}
+
+interface Movie {
+  title: string;
+  director: string | string[];
+  releaseYear: number;
+  genre: string;
+  duration?: number;
+  rating?: string;
+  reviews?: Review[];
+}
+
+const movie: Movie = {
+  title: "Everything Everywhere All at Once",
+  director: "Daniel Kwan and Daniel Scheinert",
+  releaseYear: 2022,
+  genre: "Science Fiction",
+};
+
+console.log(movie.title);
+console.log(movie["releaseYear"]);
 
 /*****************************************************************
 🛠️ Part 2: Updating the Movie Object
@@ -41,6 +65,9 @@ Now let’s say the movie got updated information and we want to add more detail
 ✅ Task 6: Update the `releaseYear` from 2022 to 2023 since the movie had a new release.
 ******************************************************************/
 
+movie.duration = 139;
+movie.rating = "R";
+movie.releaseYear = 2023;
 
 /*****************************************************************
 📚 Part 3: Making the Object More Advanced
@@ -65,6 +92,13 @@ Let’s make our movie object even more flexible and realistic!
            Then, update the `Movie` interface to use this `Review[]` for the `reviews` property.
 ******************************************************************/
 
+movie.director = ["Daniel Kwan", "Daniel Scheinert"];
+movie.reviews = [
+  {
+    reviewer: "Film Critic",
+    comment: "A wild, genre-bending masterpiece.",
+  },
+];
 
 /*****************************************************************
 🎁 Part 4: Index Signatures
@@ -83,3 +117,14 @@ Index signatures allow us to define flexible object structures in TypeScript.
 
 
 **/
+interface Movie {
+  title: string;
+  director: string | string[];
+  releaseYear: number;
+  genre: string;
+
+  [key: string]: string | boolean | number | string[] | Review[] | undefined;
+}
+
+movie["FilmStudio"] = "A24";
+movie["Cast"] = ["Michelle Yeoh", "Ke Huy Quan", "Stephanie Hsu"];
